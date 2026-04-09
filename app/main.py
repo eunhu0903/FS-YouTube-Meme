@@ -1,5 +1,6 @@
 from services.fetch_service import fetch_videos
 from services.stats_service import get_video_status
+from utils.filter import filter_videos
 
 
 def main():
@@ -15,10 +16,12 @@ def main():
     # 4. 합치기
     for v in videos:
         v["views"] = stats.get(v["video_id"], 0)
+    
+    filtered = filter_videos(videos)
 
     # 5. 출력
-    for v in videos:
-        print(v)
+    for f in filtered:
+        print(f)
 
 
 if __name__ == "__main__":
