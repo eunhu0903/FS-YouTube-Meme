@@ -20,10 +20,13 @@ def fetch_videos(query="웃긴 영상", max_results=10):
     videos = []
 
     for item in response["items"]:
+        video_id = item["id"]["videoId"]
+        
         videos.append({
-            "video_id": item["id"]["videoId"],
+            "video_id": video_id,
             "title": item["snippet"]["title"],
-            "publishedAt": item["snippet"]["publishedAt"]
+            "publishedAt": item["snippet"]["publishedAt"],
+            "url": f"https://www.youtube.com/watch?v={video_id}"
         })
     
     return videos
