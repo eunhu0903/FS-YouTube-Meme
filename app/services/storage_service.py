@@ -1,3 +1,4 @@
+import os
 import json
 from datetime import datetime
 
@@ -10,7 +11,9 @@ def safe(obj):
 
 def save_videos(videos):
     date_str = datetime.now().strftime("%Y-%m-%d")
-    filename = f"videos_{date_str}.json"
+    filename = f"data/videos_{date_str}.json"
+
+    os.makedirs("data", exist_ok=True)
 
     data = {
         "date": date_str,
