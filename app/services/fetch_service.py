@@ -1,7 +1,7 @@
 from clients.youtube import youtube
 from datetime import datetime, timedelta
 
-def fetch_videos(query="웃긴 영상", max_results=34):
+def fetch_videos(query="웃긴 영상", max_results=50):
     thirty_days_ago = datetime.utcnow() - timedelta(days=30)
 
     published_after = thirty_days_ago.isoformat("T") + "Z"
