@@ -7,6 +7,7 @@ def filter_videos(videos):
     for v in videos:
         title = v.get("title", "")
         views = v.get("views", 0)
+        likes = v.get("likes", 0)
 
         if views < MIN_VIEWS:
             continue
@@ -14,8 +15,10 @@ def filter_videos(videos):
         if not any(k in title for k in KEYWORDS):
             continue
 
+        v["score"] = views + (likes * 10)
+
         filtered.append(v)
 
-    filtered.sort(key=lambda x: x["views"], reverse=True)
+    filtered.sort(key=lambda x: x["score"], reverse=True)
 
     return filtered
