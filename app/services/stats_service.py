@@ -11,8 +11,9 @@ def get_video_status(video_ids):
     stats = {}
 
     for item in response["items"]:
-        stats[item["id"]] = int(
-            item["statistics"].get("viewCount", 0)
-        )
+        stats[item["id"]] = {
+            "views": int(item["statistics"].get("viewCount", 0)),
+            "likes": int(item["statistics"].get("likeCount", 0))
+        }
     
     return stats
