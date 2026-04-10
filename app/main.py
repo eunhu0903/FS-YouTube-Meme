@@ -4,25 +4,22 @@ from utils.filter import filter_videos
 
 
 def main():
-    # 1. 영상 가져오기
     videos = fetch_videos()
 
-    # 2. video_id 추출
-    video_ids = [v["video_id"] for v in videos]
+    videos_ids = [v["video_id"] for v in videos]
+    stats = get_video_status(videos_ids)
 
-    # 3. 조회수 가져오기
-    stats = get_video_status(video_ids)
-
-    # 4. 합치기
     for v in videos:
         v["views"] = stats.get(v["video_id"], 0)
     
     filtered = filter_videos(videos)
 
-    # 5. 출력
-    for f in filtered:
-        print(f)
+    print("\n🔥 이번달 유행 영상 TOP 리스트\n")
 
+    for i, v in enumerate(filtered, 1):
+        print(f"{i}. {v['title']}")
+        print(f"   👀 조회수: {v['views']:,}")
+        print(f"   🔗 링크: {v['url']}\n")
 
 if __name__ == "__main__":
     main()
