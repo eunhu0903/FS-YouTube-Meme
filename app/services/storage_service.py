@@ -1,6 +1,6 @@
 import os
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 def safe(obj):
@@ -8,9 +8,12 @@ def safe(obj):
         return obj.isoformat()
     return obj
 
+def get_kst_now():
+    return datetime.utcnow() + timedelta(hours=9)
+
 
 def save_videos(videos):
-    date_str = datetime.now().strftime("%Y-%m-%d")
+    date_str = get_kst_now().strftime("%Y-%m-%d")
     filename = f"data/videos_{date_str}.json"
 
     os.makedirs("data", exist_ok=True)
